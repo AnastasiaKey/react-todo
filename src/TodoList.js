@@ -20,12 +20,12 @@ const todoList = [
 const TodoList = () => {
     return (
         <ul>
-        {todoList.map(function(item) {
-          return (
-            <TodoListItem key={item.id} item={item} />
-          )
-        })
-        }
+            {todoList.map(function(item) {
+                return (
+                    <TodoListItem key={item.id} item={item} />
+                );
+              })
+            }
         </ul>
     );
 
