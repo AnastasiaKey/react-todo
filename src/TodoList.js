@@ -17,10 +17,10 @@ const todoList = [
     }
   ];
   
-const TodoList = () => {
+const TodoList = (props) => {
     return (
         <ul>
-            {todoList.map(function(item) {
+            {props.todoList.map(function(item) {
                 return (
                     <TodoListItem key={item.id} item={item} />
                 );
