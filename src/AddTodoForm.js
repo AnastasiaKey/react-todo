@@ -31,6 +31,7 @@ const AddTodoForm = ({onAddTodo}) => {
             id="todoTitle"
             name="title"
             value={todoTitle}
+            
             onChange={handleTitleChange}
             >
                 Title
