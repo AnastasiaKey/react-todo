@@ -1,8 +1,8 @@
 
-const InputWithLabel = ({id, name, value, onChange, label}) => {
+const InputWithLabel = ({id, name, value, onChange, children}) => {
     return (
         <>
-        <label htmlFor={id}>{label}</label>
+        <label htmlFor={id}>{children}</label>
             <input 
             id={id}
             name={name}
