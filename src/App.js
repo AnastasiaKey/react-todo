@@ -6,13 +6,21 @@ import TodoListItem from './TodoListItem';
 
 
 function App() {
-  // const [todoList, setTodoList] = useSemiPersistentState();
+ 
+ 
+  const [todoList, setTodoList] = React.useState([]); 
+  
+  const getAsyncTodoList = () =>
+    new Promise((resolve) =>
+    setTimeout(
+      () => resolve({ data: {todoList: todoList} }),
+      2000
+    )
 
-  const [todoList, setTodoList] = React.useState(
-        JSON.parse(localStorage.getItem('savedTodoList')) || []
-        );
-    
-      React.useEffect(() => {
+    ).then((result) => {setTodoList(result.data.todoList)});
+  
+
+  React.useEffect(() => {
         localStorage.setItem('savedTodoList', JSON.stringify(todoList));
       }, [todoList]); 
 
