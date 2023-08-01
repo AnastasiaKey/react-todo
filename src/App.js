@@ -7,21 +7,28 @@ import TodoListItem from './TodoListItem';
 
 function App() {
  
- 
-  const [todoList, setTodoList] = React.useState([]); 
+  const [todoList, setTodoList] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(true);
   
-  const getAsyncTodoList = () =>
-    new Promise((resolve) =>
-    setTimeout(
-      () => resolve({ data: {todoList: todoList} }),
-      2000
-    )
+  React.useEffect(
+    () => {
+      new Promise((resolve) =>
+      setTimeout(
+        () => resolve({ data: {todoList: JSON.parse(localStorage.getItem('savedTodoList'))} }),
+        2000
+      )
+  
+      ).then((result) => {setTodoList(result.data.todoList); setIsLoading(false);})
+    },
+    []
+  )
 
-    ).then((result) => {setTodoList(result.data.todoList)});
-  
 
   React.useEffect(() => {
+       if(!isLoading) {
         localStorage.setItem('savedTodoList', JSON.stringify(todoList));
+       }
+    
       }, [todoList]); 
 
   const addTodo = (newTodo) => {
@@ -38,6 +45,7 @@ const removeTodo = (id) => {
 }
   return (
     <>
+    {isLoading?<p>...isloading</p>:<p></p>}
       <h1>Todo List</h1>
       <AddTodoForm onAddTodo={addTodo}/>
       <TodoList todoList={todoList} onRemoveTodo={removeTodo}/>
