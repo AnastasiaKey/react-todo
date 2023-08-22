@@ -1,8 +1,7 @@
 import React from 'react';
 import TodoList from './TodoList';
 import AddTodoForm from './AddTodoForm';
-// import TodoListItem from './TodoListItem';
-// import { json } from 'express';
+
 
 
 
@@ -20,9 +19,6 @@ function App() {
         }
       };
       const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}`;
-      
-      console.log(url);
-      console.log("test",options);
 
 
         try {
@@ -33,8 +29,6 @@ function App() {
           throw new Error(message);
           }
         const data = await response.json();
-
-      console.log("DATA",data);
 
       const todos = data.records.map((todo) => {
 
@@ -47,8 +41,7 @@ function App() {
         
       setTodoList(todos);
       setIsLoading(false);
-     
-      // console.log(data);
+    
       return data;
         }
         catch {
@@ -75,9 +68,6 @@ function App() {
     
       }
       const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}`;
-      
-      console.log(url);
-      console.log(options);
     
     
       try {
@@ -97,7 +87,6 @@ function App() {
           setTodoList([...todoList, newTodo]);     
           setIsLoading(false);
           
-          console.log(data);
           return data;
     
       }
@@ -139,7 +128,7 @@ function App() {
     <>
     <h1>Todo List</h1>
       <AddTodoForm onAddTodo={addTodo}/>
-       {isLoading?<p>...isloading</p>: <TodoList todoList={todoList} onRemoveTodo={removeTodo}/>}
+      {isLoading?<p>Loading...</p>: <TodoList todoList={todoList} onRemoveTodo={removeTodo}/>}
     </>
   );
 }
